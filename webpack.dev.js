@@ -15,7 +15,6 @@ module.exports = merge(common, {
                 name: 'C:\\Program Files\\Google\\Chrome Dev\\Application\\chrome.exe'
             }
         },
-        open: true,
         port: 3000,
         hot: true,
         compress: true,
