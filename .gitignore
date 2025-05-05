@@ -1,0 +1,8 @@
+# IGNORE node_modules
+node_modules
+
+# IGNORE .env
+.env
+
+# IGNORE dist
+dist
