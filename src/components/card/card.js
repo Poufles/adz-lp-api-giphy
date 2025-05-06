@@ -20,11 +20,6 @@ export default function Card(object) {
         display_name = object.user.display_name;
     };
 
-    console.log(source);
-    console.log(title);
-    console.log(profile_link);
-    console.log(display_name);
-
     const template = `
         <article class="component card">
         <picture>
@@ -60,7 +55,7 @@ export default function Card(object) {
          * @param {HTMLElement} parent - To where the component must be appended.
          * @returns The component if no parent.
          */
-        render:  function(parent) {
+        render:  (parent) => {
             if (!parent) return component;
     
             if (!parent.contains(component)) {
@@ -68,9 +63,13 @@ export default function Card(object) {
             };
         },
     
-        unrender: function() {
-    
-        }
+        unrender: () => {
+            const parent = component.parentElement;
+
+            if (parent && parent.contains(component)) {
+                parent.removeChild(component);
+            };
+        },
 
     };
 };

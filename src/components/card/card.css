@@ -1,5 +1,5 @@
 .component.card {
-    width: max-content;
+    width: 100%;
     min-width: 250px;
     max-width: 300px;
     display: flex;
@@ -9,6 +9,7 @@
 }
 
 .component.card picture {
+    width: 100%;
     position: relative;
     overflow: hidden;
 }
@@ -28,6 +29,11 @@
 
 .component.card picture:hover:after {
     opacity: 1;
+}
+
+.component.card picture img {
+    width: 100%;
+    height: auto;
 }
 
 .component.card picture .giphy {
