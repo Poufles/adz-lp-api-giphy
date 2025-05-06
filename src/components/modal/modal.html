@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="modal.css">
+    <title>About</title>
+</head>
+<body style="background-color: var(--black); display: flex; align-items: center; justify-content: center; height: 100dvh;">
+    <div class="container" style="position: relative;">
+        <button type="button">hover for modal</button>
+        <div class="component modal">
+            <div class="wrapper">
+                <p id="message">
+                    This website serves as a way to learn how to manipulate and handle APIs through the API of GIPHY. Any gifs searched, found, and shown in this website belongs to their own uploaders and creators in GIPHY.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const button = document.querySelector('button');
+        const modal = document.querySelector('.component.modal');
+
+        button.addEventListener('mouseenter', (e) => {
+            console.log('hello');
+            modal.classList.add('open');
+        });
+
+        button.addEventListener('mouseleave', (e) => {
+            modal.classList.remove('open');
+        });
+    </script>
+</body>
+</html>

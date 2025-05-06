@@ -6,7 +6,7 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: "source-map",
     devServer: {
-        watchFiles: ["./src/templates/*.html", "./src/styles/*.css", "./src/scripts/*.js"],
+        watchFiles: ["./src/templates/*.html", "./src/scripts/*.js"],
         static: {
             directory: path.resolve(__dirname, "dist")
         },
@@ -15,7 +15,6 @@ module.exports = merge(common, {
                 name: 'C:\\Program Files\\Google\\Chrome Dev\\Application\\chrome.exe'
             }
         },
-        open: true,
         port: 3000,
         hot: true,
         compress: true,

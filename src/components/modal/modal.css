@@ -1,0 +1,36 @@
+.component.modal {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.component.modal .wrapper {
+    background-color: var(--black);
+    border: 2px solid var(--white);
+    color: var(--white);
+    width: 300px;
+    padding: 7px 13px;
+    display: none;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transition-behavior: allow-discrete;
+    transition-property: opacity, display, max-height;
+    transition-duration: 0.2s;
+}
+
+.component.modal.open .wrapper {
+    display: block;
+    opacity: 1;
+
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+.component.modal .wrapper #message {
+    min-height: max-content;
+}
