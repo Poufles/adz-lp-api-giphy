@@ -15,7 +15,6 @@ function App() {
      * should be hidden but ofcourse, there is no backend
      * therefore, voila ! The GIPHY key !   
     */
-    let query;
     const initialGifsArr = ['lebron', 'lmao', 'what', 'cat', 'dog', 'philippines', 'coding', 'programming', 'idk man', 'amazing', 'love', 'sad', 'nerd', 'kpop', 'lols', 'france'];
 
     const api_key = process.env.GIPHY_API_KEY;
@@ -31,7 +30,7 @@ function App() {
 
     const chosen = initialGifsArr[Math.floor(Math.random() * initialGifsArr.length)];
 
-    query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=14&q=${chosen}`
+    const query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=14&q=${chosen}`
 
     FetchQuery(query);
 
@@ -47,50 +46,65 @@ function App() {
         AboutModal.show();
     });
 
+    input_search.addEventListener('keydown', (e) => {
+        e.stopPropagation();
+        console.log(e.key);
+        
+        if (e.key === 'Enter') {
+            console.log('hello');
+            Search(input_search, initialGifsArr, api_key);
+        };
+    });
+    
     btn_search.addEventListener('click', (e) => {
         e.stopPropagation();
-
-        const input = input_search.value;
-
-        if (input === '') {
-
-            const chosen = initialGifsArr[Math.floor(Math.random() * initialGifsArr.length)];
-
-            query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=14&q=${chosen}`
-
-        } else {
-
-            const input = input_search.value;
-            initialGifsArr.push(input)
-
-            query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=14&q=${input}`;
-
-        };
-
-        FetchQuery(query);
+        
+        Search(input_search, initialGifsArr, api_key);
     });
+};
+
+function Search(inputEl, arr, key) {
+    let query;
+    const input = inputEl.value;
+
+    if (input === '') {
+
+        const chosen = arr[Math.floor(Math.random() * arr.length)];
+
+        query = `https://api.giphy.com/v1/gifs/search?api_key=${key}&limit=14&q=${chosen}`
+
+    } else {
+
+        const input = inputEl.value;
+        arr.push(input)
+
+        query = `https://api.giphy.com/v1/gifs/search?api_key=${key}&limit=14&q=${input}`;
+
+    };
+
+    FetchQuery(query);
 };
 
 function FetchQuery(query) {
     fetch(query, { mode: 'cors' })
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (response) {
-        const data = response.data
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            const data = response.data
 
-        if (response.data.length === 0) {
-            Gallery.placeholder(true); return;
-        };
+            if (response.data.length === 0) {
+                Gallery.placeholder(true); return;
+            };
 
-        Gallery.placeholder(false);
-        Gallery.removeContent({ isReset: true });
-        for (let item of data) {
-            const gif = Card(item);
+            Gallery.placeholder(false);
+            Gallery.removeContent({ isReset: true });
+            for (let item of data) {
+                const gif = Card(item);
 
-            Gallery.addContent(gif);
-        };
-    });
+                Gallery.addContent(gif);
+            };
+        });
 };
 
 App();
