@@ -31,7 +31,7 @@ function App() {
 
     const chosen = initialGifsArr[Math.floor(Math.random() * initialGifsArr.length)];
 
-    query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=15&q=${chosen}`
+    query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=14&q=${chosen}`
 
     FetchQuery(query);
 
@@ -56,14 +56,14 @@ function App() {
 
             const chosen = initialGifsArr[Math.floor(Math.random() * initialGifsArr.length)];
 
-            query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=10&q=${chosen}`
+            query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=14&q=${chosen}`
 
         } else {
 
             const input = input_search.value;
             initialGifsArr.push(input)
 
-            query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=15&q=${input}`;
+            query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=14&q=${input}`;
 
         };
 

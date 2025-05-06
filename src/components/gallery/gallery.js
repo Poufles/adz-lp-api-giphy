@@ -23,16 +23,6 @@ const Gallery = function () {
 
     let currentGallery = gallery_1;
 
-    // Initialize placeholder
-    // fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${api_key}&limit=10&s=idk`, { mode: 'cors' })
-    //     .then(function (response) {
-    //         return response.json();
-    //     })
-    //     .then(function (response) {
-    //         const img = placeholder.querySelector('img');
-    //         img.src = response.data.images.original.url
-    //     });
-
     component.removeChild(placeholder);
 
     // Verify website width
@@ -43,7 +33,7 @@ const Gallery = function () {
     window.addEventListener('resize', (e) => {
         let width = window.innerWidth;
 
-        if (width >= 640) {
+        if (width >= 610) {
 
             if (!component.contains(gallery_2)) {
                 component.appendChild(gallery_2);
