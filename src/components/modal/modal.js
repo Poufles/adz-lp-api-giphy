@@ -18,6 +18,12 @@ const AboutModal = function() {
             if (!parent) return component;
 
             if (!parent.contains(component)) parent.appendChild(component);
+        },
+        unrender: () => {
+
+        },
+        show: () => {
+            component.classList.toggle('open');
         }
     };
 }();

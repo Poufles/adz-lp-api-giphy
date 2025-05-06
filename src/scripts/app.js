@@ -2,9 +2,11 @@ import '../styles/main.css';
 import '../styles/app.css';
 import '../styles/app-responsive.css';
 import '../components/card/card.css';
+import '../components/modal/modal.css';
 
 import Card from '../components/card/card.js';
 import Gallery from '../components/gallery/gallery.js';
+import AboutModal from '../components/modal/modal.js';
 
 function App() {
 
@@ -19,17 +21,31 @@ function App() {
     const api_key = process.env.GIPHY_API_KEY;
     const cont_left = document.getElementById('left');
     const cont_right = document.getElementById('right');
+    const about = cont_left.querySelector('#about');
     const searchbar = cont_left.querySelector('.searchbar');
     const input_search = searchbar.querySelector('input');
     const btn_search = searchbar.querySelector(' #search');
 
+    AboutModal.render(navbar);
     Gallery.render(cont_right);
 
-    // const chosen = initialGifsArr[Math.floor(Math.random() * initialGifsArr.length)];
+    const chosen = initialGifsArr[Math.floor(Math.random() * initialGifsArr.length)];
 
-    // query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=15&q=${chosen}`
+    query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=15&q=${chosen}`
 
-    // FetchQuery(query);
+    FetchQuery(query);
+
+    about.addEventListener('mouseenter', (e) => {
+        e.stopPropagation();
+
+        AboutModal.show();
+    });
+
+    about.addEventListener('mouseleave', (e) => {
+        e.stopPropagation();
+
+        AboutModal.show();
+    });
 
     btn_search.addEventListener('click', (e) => {
         e.stopPropagation();
