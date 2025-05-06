@@ -36,19 +36,44 @@ const Gallery = function () {
     component.removeChild(placeholder);
 
     // Verify website width
-    if (window.innerWidth <= 700) {
+    if (window.innerWidth < 640) {
         component.removeChild(gallery_2);
     };
 
-    document.addEventListener('resize', (e) => {
-        const width = window.innerWidth;
+    window.addEventListener('resize', (e) => {
+        let width = window.innerWidth;
 
-        if (width >= 700) {
+        if (width >= 640) {
 
             if (!component.contains(gallery_2)) {
                 component.appendChild(gallery_2);
+
+                for (let content of contentArr) {
+                    content.unrender();
+                };
+
+                currentGallery = gallery_1;
+                for (let content of contentArr) {
+                    content.render(currentGallery);
+
+                    currentGallery = currentGallery === gallery_1 ? gallery_2 : gallery_1;
+                };
             };
 
+        } else {
+            
+            if (component.contains(gallery_2)) {
+                component.removeChild(gallery_2);
+
+                for (let content of contentArr) {
+                    content.unrender();
+                };
+
+                for (let content of contentArr) {
+                    content.render(gallery_1);
+                };
+            };
+            
         };
     });
 
@@ -65,7 +90,6 @@ const Gallery = function () {
 
             currentGallery = currentGallery === gallery_1 ? gallery_2 : gallery_1;
         },
-
         removeContent: ({ index, isReset = false } = {}) => {
             if (isReset) {
                 while (contentArr.length != 0) {
@@ -84,12 +108,12 @@ const Gallery = function () {
 
                 if (component.contains(placeholder)) return;
                 component.appendChild(placeholder);
-                
+
             } else {
-                
+
                 if (!component.contains(placeholder)) return;
                 component.remove(placeholder)
-                
+
             };
         }
     };

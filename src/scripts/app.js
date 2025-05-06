@@ -1,5 +1,6 @@
 import '../styles/main.css';
 import '../styles/app.css';
+import '../styles/app-responsive.css';
 import '../components/card/card.css';
 
 import Card from '../components/card/card.js';
@@ -26,27 +27,9 @@ function App() {
 
     // const chosen = initialGifsArr[Math.floor(Math.random() * initialGifsArr.length)];
 
-    // query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=10&q=${chosen}`
+    // query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=15&q=${chosen}`
 
-    // fetch(query, { mode: 'cors' })
-    //     .then(function (response) {
-    //         return response.json();
-    //     })
-    //     .then(function (response) {
-    //         const data = response.data
-
-    //         if (response.data.length === 0) {
-    //             Gallery.placeholder(true); return;
-    //         };
-
-    //         Gallery.placeholder(false);
-    //         Gallery.removeContent({ isReset: true });
-    //         for (let item of data) {
-    //             const gif = Card(item);
-
-    //             Gallery.addContent(gif);
-    //         };
-    //     });
+    // FetchQuery(query);
 
     btn_search.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -64,31 +47,34 @@ function App() {
             const input = input_search.value;
             initialGifsArr.push(input)
 
-            query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=10&q=${input}`;
+            query = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&limit=15&q=${input}`;
 
         };
 
-        fetch(query, { mode: 'cors' })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (response) {
-                const data = response.data
-
-                if (response.data.length === 0) {
-                    Gallery.placeholder(true); return;
-                };
-
-                Gallery.placeholder(false);
-                Gallery.removeContent({ isReset: true });
-                for (let item of data) {
-                    const gif = Card(item);
-
-                    Gallery.addContent(gif);
-                };
-            });
+        FetchQuery(query);
     });
 };
 
+function FetchQuery(query) {
+    fetch(query, { mode: 'cors' })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (response) {
+        const data = response.data
+
+        if (response.data.length === 0) {
+            Gallery.placeholder(true); return;
+        };
+
+        Gallery.placeholder(false);
+        Gallery.removeContent({ isReset: true });
+        for (let item of data) {
+            const gif = Card(item);
+
+            Gallery.addContent(gif);
+        };
+    });
+};
 
 App();

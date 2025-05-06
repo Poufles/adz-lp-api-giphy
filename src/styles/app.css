@@ -123,10 +123,31 @@ body {
     width:  15px;
 }
 
+#left #links {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+#left #socmed {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    justify-content: center;
+}
+
+#left #socmed svg {
+    aspect-ratio: 1;
+    width: 24px;
+    height: 24px;
+    fill: var(--white);
+}
+
 #right {
     border-left: 2px solid var(--white);
     margin: 40px 0;
-    width: max-content;
+    width: 100%;
     max-width: 60%;
     min-width: 40%;
 }
